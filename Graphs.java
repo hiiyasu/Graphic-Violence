@@ -3,6 +3,31 @@ import java.util.Scanner;
 public class Graphs {
 
     public static void main(String[] args) {
+        String filename = "graphInput1.txt";
+        File file = new File(filename);
+        Scanner fileReader = null;
+        try {
+             fileReader = new Scanner(file);
+        } catch(Exception e){}
+
+        int numNodes = fileReader.nextInt();
+
+        Graph graph = new Graph(numNodes);
+        int counter = 0;
+        while (fileReader.hasNext()) {
+           String nextLine = fileReader.nextLine();
+           String[] lines = nextLine.split("\\s+");
+           for (int i = 1; i < lines.length; i+=2) {
+               try {
+                   graph.addWeightedConnection(counter, lines[i], lines[i+1]);
+               } catch (ArrayIndexOutOfBoundsException e) {
+                   System.out.print("Improperly formatted file");
+               }
+           }
+           counter++;
+        }
+        
+        
         Scanner in = new Scanner(System.in);
         int choice = 0;
         while(choice != 8){
