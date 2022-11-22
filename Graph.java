@@ -1,10 +1,18 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Graph {
     public static void main(String[] args) {
-        Graph graph = new Graph();
+        Graph graph = null;
+        try {
+            graph = new Graph("graphinput.txt");
+        } catch(Exception e){}
+        System.out.println(graph.toString());
+        for (Integer i: graph.edgeTo(3)) {
+            System.out.println("edge:" + i.toString());
+        }
     }
 
     private RedBlackTree<Integer, Integer> adj[];
@@ -28,8 +36,11 @@ public class Graph {
             String[] lines = nextLine.split("\\s+");
             for (int i = 1; i < lines.length; i+=2) {
                 try {
+                    System.out.println("line = " + firstVert);
+                    System.out.println("i=" + i);
                     int secondVert = Integer.parseInt(lines[i]);
                     int weight = Integer.parseInt(lines[i+1]);
+                    //System.out.println(firstVert + "\t" + secondVert+ "\t" + weight);
                     this.addEdge(firstVert, secondVert, weight);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.print("Improperly formatted file");
@@ -40,22 +51,30 @@ public class Graph {
     }
 
     public Iterable<Integer> edgeTo(int v){
-        return new Queue<>();
+        return adj[v].keys();
     }
 
     public int V(){
         return adj.length;
     }
 
+    @Override
     public String toString() {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Graph{" +
+                "V=" + adj.length);
+        for (RedBlackTree<Integer, Integer> r: adj) {
+            sb.append(r.toString());
+        }
+        return sb.toString();
     }
 
     public int weight(int a, int b){
-        return 0;
+        return adj[a].get(b);
     }
 
     public void addEdge(int v, int w, int weight){
+        adj[v].put(w, weight);
     }
 }
 
