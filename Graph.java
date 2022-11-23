@@ -25,7 +25,7 @@ public class Graph {
 
     Graph(String filename) throws FileNotFoundException {
         Scanner in = new Scanner(new File(filename));
-        int V = in.nextInt();
+        int V = Integer.parseInt( in.nextLine() );
         adj = new RedBlackTree[V];
         for(int i = 0; i < adj.length; ++i){
             adj[i] = new RedBlackTree<>();
