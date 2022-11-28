@@ -14,8 +14,7 @@ public class Graph {
             System.out.println("edge:" + i.toString());
         }
     }
-
-    private RedBlackTree<Integer, Integer> adj[];
+    
     Graph(int V){
         adj = new RedBlackTree[V];
         for(int i = 0; i < adj.length; ++i){
