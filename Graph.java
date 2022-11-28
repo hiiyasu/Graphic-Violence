@@ -1,9 +1,9 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Graph {
+    private Boolean isConnected;
+    private RedBlackTree<Integer, Integer> adj[];
+    
     public static void main(String[] args) {
         Graph graph = null;
         try {
@@ -76,33 +76,34 @@ public class Graph {
     public void addEdge(int v, int w, int weight){
         adj[v].put(w, weight);
     }
-    
+
     public boolean isConnected() {
-		if (isConnected != null) return isConnected;
-		DepthFirstSearch dfs = new DepthFirstSearch(this, 0);
-		boolean isConnected = true;
-		for (int i = 0; i < adj.length && isConnected; i++) {
-			if (!dfs.marked(i)) isConnected = false;
-		}
-		this.isConnected = isConnected;
-		return isConnected;
-	}
+        if (isConnected != null) return isConnected;
+        DepthFirstSearch dfs = new DepthFirstSearch(this, 0);
+        boolean isConnected = true;
+        for (int i = 0; i < adj.length && isConnected; i++) {
+            if (!dfs.marked(i)) isConnected = false;
+        }
+        this.isConnected = isConnected;
+        return isConnected;
+    }
 
-	public String mst() {
-		return "";
-	}
+    public String mst() {
+        return "";
+    }
 
-	public String shortestPath(int v) {
-		return "";
-	}
+    public String shortestPath(int v) {
+        return "";
+    }
 
-	public boolean isMetric() {
-		return false;
-	}
+    public boolean isMetric() {
+        return false;
+    }
 
-	public String makeMetric() {
-		return "";
-	}
+    public String makeMetric() {
+        return "";
+    }
 }
+
 
 
